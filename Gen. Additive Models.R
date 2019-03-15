@@ -1,3 +1,5 @@
+require ("gam")
+setwd("D:/Users/Dest/Msc/Statistical Analyses")
 range<-na.exclude(read.delim("gam_range.txt", h=T, sep="\t"))
 
 breadth<-na.exclude(read.delim("Niche Breadth Eurasia until 11kyr.txt", h=T, sep="\t"))
@@ -12,3 +14,7 @@ write.table(data, "PCA_range.txt", quote=FALSE)
 gam1<-gam(Range.size~ PC1 + PC2 + factor(culture), family=poisson, link="log", data=data)
 
 steps<-step.gam(gam1, scope=list("PC1"= ~ 1 + PC1 + s(PC1,4), "PC2"= ~ 1 + PC2 + s(PC2,4), "culture"= ~ 1 + factor(culture)), direction="both", trace=TRUE)
+
+gam.check(steps, type= "pearson")
+dev.new()
+plot(steps, pages=1, scheme=2)
