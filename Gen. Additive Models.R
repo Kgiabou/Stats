@@ -1,4 +1,4 @@
-require ("gam")
+require (gam)
 setwd("D:/Users/Dest/Msc/Statistical Analyses")
 range<-na.exclude(read.delim("gam_range.txt", h=T, sep="\t"))
 
